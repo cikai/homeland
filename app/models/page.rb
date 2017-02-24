@@ -31,7 +31,7 @@ class Page < ApplicationRecord
     # 以免后台，以及其他的一些 update 时被误调用
     return true unless version_enable
     # 只有 body, title, slug 更改了才更新版本
-    if self.body_changed? || self.title_changed? || self.slug_changed?
+    if indexed_changed?
       update_column(:version, self.version + 1)
       PageVersion.create(user_id: user_id,
                          page_id: id,
