@@ -48,7 +48,7 @@ class Page < ApplicationRecord
   end
 
   def indexed_changed?
-    slug_changed? || title_changed? || body_changed?
+    saved_change_to_slug? || saved_change_to_title? || saved_change_to_body?
   end
 
   def to_param
