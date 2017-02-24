@@ -24,7 +24,7 @@ class SettingsController < ApplicationController
       update_password
     when "profile"
       update_profile
-    when 'reward'
+    when "reward"
       update_reward
     else
       update_basic
@@ -93,9 +93,9 @@ class SettingsController < ApplicationController
     end
 
     if @user.update_reward_fields(res)
-      redirect_to reward_setting_path, notice: '更新成功'
+      redirect_to reward_setting_path, notice: "更新成功"
     else
-      render 'reward'
+      render "reward"
     end
   end
 
