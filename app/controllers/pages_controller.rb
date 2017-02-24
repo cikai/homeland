@@ -21,7 +21,7 @@ class PagesController < ApplicationController
         return
       end
 
-      redirect_to new_page_path(title: params[:id]), notice: 'Page not Found, Please create a new page'
+      redirect_to new_page_path(title: params[:id]), notice: "Page not Found, Please create a new page"
       return
     end
 
@@ -51,9 +51,9 @@ class PagesController < ApplicationController
     @page.version_enable = true
 
     if @page.save
-      redirect_to page_path(@page.slug), notice: t('common.create_success')
+      redirect_to page_path(@page.slug), notice: t("common.create_success")
     else
-      render action: 'new'
+      render action: "new"
     end
   end
 
@@ -62,9 +62,9 @@ class PagesController < ApplicationController
     @page.user_id = current_user.id
 
     if @page.update(page_params)
-      redirect_to page_path(@page.slug), notice: t('common.update_success')
+      redirect_to page_path(@page.slug), notice: t("common.update_success")
     else
-      render action: 'edit'
+      render action: "edit"
     end
   end
 

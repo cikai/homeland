@@ -6,7 +6,7 @@ module Admin
     def index
       @sites = Site.unscoped.recent.includes(:user, :site_node)
       if params[:q].present?
-        @sites = @sites.where('name LIKE ?', "%#{params[:q]}%")
+        @sites = @sites.where("name LIKE ?", "%#{params[:q]}%")
       end
       @sites = @sites.page(params[:page])
     end
@@ -25,17 +25,17 @@ module Admin
       @site = Site.new(params[:site].permit!)
 
       if @site.save
-        redirect_to(admin_sites_path, notice: 'Site 创建成功。')
+        redirect_to(admin_sites_path, notice: "Site 创建成功。")
       else
-        render action: 'new'
+        render action: "new"
       end
     end
 
     def update
       if @site.update(params[:site].permit!)
-        redirect_to(admin_sites_path, notice: 'Site 更新成功。')
+        redirect_to(admin_sites_path, notice: "Site 更新成功。")
       else
-        render action: 'edit'
+        render action: "edit"
       end
     end
 

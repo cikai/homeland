@@ -39,8 +39,8 @@ class ApplicationController < ActionController::Base
   before_action :set_active_menu
   def set_active_menu
     @current = case controller_name
-               when 'pages'
-                 ['/wiki']
+               when "pages"
+                 ["/wiki"]
                else
                  ["/#{controller_name}"]
                end
@@ -66,13 +66,13 @@ class ApplicationController < ActionController::Base
 
   def render_optional_error_file(status_code)
     status = status_code.to_s
-    fname = %w(404 403 422 500).include?(status) ? status : 'unknown'
+    fname = %w(404 403 422 500).include?(status) ? status : "unknown"
     render template: "/errors/#{fname}", format: [:html],
-           handler: [:erb], status: status, layout: 'application'
+           handler: [:erb], status: status, layout: "application"
   end
 
   rescue_from CanCan::AccessDenied do |_exception|
-    redirect_to topics_path, alert: t('common.access_denied')
+    redirect_to topics_path, alert: t("common.access_denied")
   end
 
   def store_location
@@ -96,7 +96,7 @@ class ApplicationController < ActionController::Base
   def authenticate_user!(opts = {})
     return if current_user
     if turbolinks_app?
-      render plain: '401 Unauthorized', status: 401
+      render plain: "401 Unauthorized", status: 401
       return
     end
 
@@ -117,20 +117,20 @@ class ApplicationController < ActionController::Base
   end
 
   def turbolinks_app?
-    @turbolinks_app ||= request.user_agent.to_s.include?('turbolinks-app')
+    @turbolinks_app ||= request.user_agent.to_s.include?("turbolinks-app")
   end
 
   def turbolinks_ios?
-    @turbolinks_ios ||= turbolinks_app? && request.user_agent.to_s.include?('iOS')
+    @turbolinks_ios ||= turbolinks_app? && request.user_agent.to_s.include?("iOS")
   end
 
   # read turbolinks app version
   # example: version:2.1
   def turbolinks_app_version
-    return '' unless turbolinks_app?
+    return "" unless turbolinks_app?
     return @turbolinks_app_version if defined? @turbolinks_app_version
     version_str = request.user_agent.to_s.match(/version:[\d\.]+/).to_s
-    @turbolinks_app_version = version_str.split(':').last
+    @turbolinks_app_version = version_str.split(":").last
     @turbolinks_app_version
   end
 

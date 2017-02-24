@@ -6,15 +6,15 @@ module Homeland
       def call
         @text.gsub(YOUTUBE_URL_REGEXP) do
           youtube_id = Regexp.last_match(5)
-          close_tag = Regexp.last_match(1) if ['<br>', '<div>'].include? Regexp.last_match(1)
+          close_tag = Regexp.last_match(1) if ["<br>", "<div>"].include? Regexp.last_match(1)
           wmode = context[:video_wmode]
           autoplay = context[:video_autoplay] || false
           hide_related = context[:video_hide_related] || false
           src = "//www.youtube.com/embed/#{youtube_id}"
           params = []
           params << "wmode=#{wmode}" if wmode
-          params << 'autoplay=1' if autoplay
-          params << 'rel=0' if hide_related
+          params << "autoplay=1" if autoplay
+          params << "rel=0" if hide_related
           src += "?#{params.join '&'}" unless params.empty?
 
           %(#{close_tag}<span class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" src="#{src}" allowfullscreen></iframe></span>)

@@ -3,7 +3,7 @@ class LikesController < ApplicationController
   before_action :set_likeable
 
   def index
-    @users = @item.like_by_users.order('actions.id asc')
+    @users = @item.like_by_users.order("actions.id asc")
     render :index, layout: false
   end
 
@@ -23,20 +23,20 @@ class LikesController < ApplicationController
     @success = false
     @element_id = "likeable_#{params[:type]}_#{params[:id]}"
     unless params[:type].in?(%w(Topic Reply))
-      render plain: '-1'
+      render plain: "-1"
       return false
     end
 
     case params[:type].downcase
-    when 'topic'
+    when "topic"
       klass = Topic
-    when 'reply'
+    when "reply"
       klass = Reply
     else
       return false
     end
 
     @item = klass.find_by_id(params[:id])
-    render plain: '-2' if @item.blank?
+    render plain: "-2" if @item.blank?
   end
 end

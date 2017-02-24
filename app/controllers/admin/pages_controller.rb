@@ -20,9 +20,9 @@ module Admin
       @page = Page.new(params[:page].permit!)
 
       if @page.save
-        redirect_to(admin_pages_path, notice: 'Page was successfully created.')
+        redirect_to(admin_pages_path, notice: "Page was successfully created.")
       else
-        render action: 'new'
+        render action: "new"
       end
     end
 
@@ -34,9 +34,9 @@ module Admin
       @page.user_id = current_user.id
 
       if @page.save
-        redirect_to(admin_pages_path, notice: 'Page was successfully updated.')
+        redirect_to(admin_pages_path, notice: "Page was successfully updated.")
       else
-        render action: 'edit'
+        render action: "edit"
       end
     end
 

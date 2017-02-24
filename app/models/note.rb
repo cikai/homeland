@@ -26,6 +26,6 @@ class Note < ApplicationRecord
   end
 
   def display_title
-    (title || '').gsub(/^[\#]+/, '')
+    (title || "").gsub(/^[\#]+/, "")
   end
 end

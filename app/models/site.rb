@@ -17,14 +17,14 @@ class Site < ApplicationRecord
   before_validation :fix_urls
   def fix_urls
     unless url.blank?
-      url = self.url.gsub(%r{http[s]{0,1}://}, '').split('/').join('/')
+      url = self.url.gsub(%r{http[s]{0,1}://}, "").split("/").join("/")
       self.url = "http://#{url}"
     end
   end
 
   def favicon_url
-    return '' if url.blank?
-    domain = url.gsub('http://', '')
+    return "" if url.blank?
+    domain = url.gsub("http://", "")
     "https://favicon.b0.upaiyun.com/ip2/#{domain}.ico"
   end
 end

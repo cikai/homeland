@@ -9,10 +9,10 @@ module Homeland
       return if env[:is_whitelisted] || !node.element?
 
       # Don't continue unless the node is an iframe.
-      return unless node_name == 'iframe'
+      return unless node_name == "iframe"
 
       # Verify that the video URL is actually a valid YouTube video URL.
-      return unless node['src'].match?(%r{\A(?:https?:)?//(?:www\.)?youtube(?:-nocookie)?\.com/})
+      return unless node["src"].match?(%r{\A(?:https?:)?//(?:www\.)?youtube(?:-nocookie)?\.com/})
 
       # We're now certain that this is a YouTube embed, but we still need to run
       # it through a special Sanitize step to ensure that no unwanted elements or
@@ -20,7 +20,7 @@ module Homeland
       ::Sanitize.node!(node, elements: %w(iframe),
 
                              attributes: {
-                               'iframe' => %w(allowfullscreen class frameborder height src width)
+                               "iframe" => %w(allowfullscreen class frameborder height src width)
                              })
 
       # Now that we're sure that this is a valid YouTube embed and that there are
@@ -38,11 +38,11 @@ module Homeland
       attributes: ::Sanitize::Config.merge({},
                                            # 这里要确保是 :all, 而不是 'all'
                                            :all  => %w(class id lang style tabindex title translate),
-                                           'a'   => %w(href rel data-floor target),
-                                           'img' => %w(alt src width height)),
+                                           "a"   => %w(href rel data-floor target),
+                                           "img" => %w(alt src width height)),
 
       protocols: {
-        'a' => { 'href' => ['http', 'https', 'mailto', :relative] }
+        "a" => { "href" => ["http", "https", "mailto", :relative] }
       },
 
       transformers: [YOUTUBE_TRANSFORMER]

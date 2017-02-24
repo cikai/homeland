@@ -25,20 +25,20 @@ class NotesController < ApplicationController
 
   def create
     @note = current_user.notes.new(note_params)
-    @note.publish = note_params[:publish] == '1'
+    @note.publish = note_params[:publish] == "1"
     if @note.save
-      redirect_to(@note, notice: t('common.create_success'))
+      redirect_to(@note, notice: t("common.create_success"))
     else
-      render action: 'new'
+      render action: "new"
     end
   end
 
   def update
     @note = current_user.notes.find(params[:id])
     if @note.update(note_params)
-      redirect_to(@note, notice: t('common.update_success'))
+      redirect_to(@note, notice: t("common.update_success"))
     else
-      render action: 'edit'
+      render action: "edit"
     end
   end
 

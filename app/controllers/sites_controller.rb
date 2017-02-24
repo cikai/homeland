@@ -14,9 +14,9 @@ class SitesController < ApplicationController
     @site = Site.new(site_params)
     @site.user_id = current_user.id
     if @site.save
-      redirect_to(sites_path, notice: '提交成功。谢谢。')
+      redirect_to(sites_path, notice: "提交成功。谢谢。")
     else
-      render action: 'new'
+      render action: "new"
     end
   end
 
